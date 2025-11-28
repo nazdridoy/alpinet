@@ -30,10 +30,10 @@ This document provides detailed justification for all packages included in the A
 - **Justification**: The gold standard for packet capture. Critical for deep protocol analysis and troubleshooting.
 - **Use Cases**: Capture network traffic, analyze protocols, debug connection issues, verify firewall rules
 
-### nmap & nmap-scripts
+### nmap
 - **Purpose**: Network discovery and security auditing
-- **Provides**: Port scanner and network mapper with NSE scripts
-- **Justification**: Industry-standard tool for network reconnaissance, port scanning, and service detection. Scripts provide extended functionality.
+- **Provides**: Port scanner and network mapper
+- **Justification**: Industry-standard tool for network reconnaissance, port scanning, and service detection.
 - **Use Cases**: Discover network services, scan ports, detect OS versions, audit security
 
 ### curl
@@ -146,11 +146,6 @@ This document provides detailed justification for all packages included in the A
 - **Justification**: Essential for network device management. Most routers, switches, and network equipment use TFTP for configuration backup/restore and firmware updates.
 - **Use Cases**: Backup router/switch configs, upload firmware to network devices, restore configurations, PXE boot testing
 
-### samba-client
-- **Purpose**: SMB/CIFS client utilities
-- **Provides**: `smbclient`, SMB file access
-- **Justification**: Required for accessing Windows file shares and SMB-based network storage. Common in mixed environments with Windows servers.
-- **Use Cases**: Access Windows shares, transfer files to/from CIFS servers, backup to NAS, access shared configurations
 
 ---
 
@@ -208,11 +203,6 @@ This document provides detailed justification for all packages included in the A
 - **Justification**: Better than 'more', essential for viewing large log files.
 - **Use Cases**: View logs, read documentation, scroll through output
 
-### git
-- **Purpose**: Version control system
-- **Provides**: Git client
-- **Justification**: Clone repositories, manage scripts, version control for configurations.
-- **Use Cases**: Clone network automation tools, version control, download projects
 
 ### tmux
 - **Purpose**: Terminal multiplexer
@@ -276,50 +266,6 @@ This document provides detailed justification for all packages included in the A
 
 ---
 
-## Python Environment
-
-### python3
-- **Purpose**: Python interpreter
-- **Provides**: Python 3.x runtime
-- **Justification**: Required for advanced networking automation and custom scripts.
-- **Use Cases**: Run network automation scripts, custom tools, packet manipulation
-
-### py3-pip
-- **Purpose**: Python package installer
-- **Provides**: `pip3` command
-- **Justification**: Required to install additional Python networking libraries.
-- **Use Cases**: Install Python packages, manage dependencies
-
----
-
-## Python Networking Libraries
-
-### scapy
-- **Purpose**: Packet manipulation library
-- **Provides**: Python packet crafting framework
-- **Justification**: The most powerful packet manipulation tool. Essential for custom protocol testing.
-- **Use Cases**: Craft custom packets, protocol fuzzing, network discovery, security testing
-
-### netaddr
-- **Purpose**: Network address manipulation
-- **Provides**: IP/MAC address handling library
-- **Justification**: Simplifies IP address calculations and subnet operations in scripts.
-- **Use Cases**: Subnet calculations, IP address validation, CIDR operations
-
-### ipython
-- **Purpose**: Enhanced Python shell
-- **Provides**: Interactive Python with advanced features
-- **Justification**: Better REPL for interactive Python work, useful for testing scripts.
-- **Use Cases**: Interactive packet crafting with Scapy, testing code, exploring libraries
-
-### requests
-- **Purpose**: HTTP library for Python
-- **Provides**: Simple HTTP client
-- **Justification**: Industry-standard library for making HTTP requests in Python scripts.
-- **Use Cases**: Test REST APIs, automate web interactions, network automation
-
----
-
 ## Additional Utilities
 
 ### ca-certificates
@@ -376,17 +322,6 @@ This document provides detailed justification for all packages included in the A
 - **Justification**: Standard compression for Linux, works with tar.
 - **Use Cases**: Compress files, decompress downloads, save space
 
-### bzip2
-- **Purpose**: Compression utility
-- **Provides**: BZIP2 compression
-- **Justification**: Better compression than gzip for some files.
-- **Use Cases**: Compress large files, extract bz2 archives
-
-### xz
-- **Purpose**: Compression utility
-- **Provides**: XZ/LZMA compression
-- **Justification**: Best compression ratio, common in modern distributions.
-- **Use Cases**: Compress large files, extract xz archives, handle LZMA files
 
 ---
 
@@ -411,7 +346,7 @@ Despite the comprehensive toolkit, the image maintains reasonable size through:
 
 ## Estimated Image Size
 
-**Expected final size**: ~250-350 MB
+**Expected final size**: ~114 MB
 
 This is considered excellent for the comprehensive toolset provided, comparable to or smaller than similar networking toolboxes while offering more functionality.
 
@@ -421,7 +356,7 @@ This is considered excellent for the comprehensive toolset provided, comparable 
 
 Every package in AlpiNet serves a specific purpose in network testing, troubleshooting, and education. The toolkit is designed to provide a complete environment for network engineers, students, and researchers working in GNS3 without requiring additional installations or external dependencies.
 
-**Total Packages**: 60+ APK packages + 4 Python packages  
+**Total Packages**: 50+ APK packages  
 **Categories Covered**: 
 - Network testing and diagnostics
 - Packet analysis and manipulation
@@ -429,6 +364,5 @@ Every package in AlpiNet serves a specific purpose in network testing, troublesh
 - System administration
 - Text processing and scripting
 - File operations and compression
-- Python automation framework
 
 This comprehensive yet optimized approach makes AlpiNet a powerful and efficient networking toolbox for GNS3 virtual environments.

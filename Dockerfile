@@ -4,7 +4,7 @@ FROM alpine:latest
 # Metadata
 LABEL maintainer="nazDridoy <nazdridoy399@gmail.com>"
 LABEL description="Lightweight Alpine-based networking toolbox for GNS3"
-LABEL version="1.1.0"
+LABEL version="1.2.0"
 
 # Install essential networking and system utilities
 RUN apk --no-cache add \
@@ -14,7 +14,6 @@ RUN apk --no-cache add \
     bind-tools \
     tcpdump \
     nmap \
-    nmap-scripts \
     curl \
     wget \
     openssh-client \
@@ -34,14 +33,12 @@ RUN apk --no-cache add \
     # File transfer clients
     lftp \
     tftp-hpa \
-    samba-client \
     # System utilities
     bash \
     bash-completion \
     vim \
     nano \
     less \
-    git \
     tmux \
     screen \
     htop \
@@ -54,9 +51,6 @@ RUN apk --no-cache add \
     findutils \
     # Network testing
     iperf \
-    # Python and tools
-    python3 \
-    py3-pip \
     # Additional utilities
     ca-certificates \
     openssl \
@@ -67,18 +61,8 @@ RUN apk --no-cache add \
     rsync \
     tar \
     gzip \
-    bzip2 \
-    xz \
     dumb-init \
-    busybox-extras \
-    && rm -rf /var/cache/apk/*
-
-# Install Python networking tools
-RUN pip3 install --no-cache-dir --break-system-packages \
-    scapy \
-    netaddr \
-    ipython \
-    requests
+    busybox-extras
 
 # Set bash as default shell
 RUN sed -i 's|/bin/ash|/bin/bash|g' /etc/passwd
@@ -111,28 +95,60 @@ RUN echo '#!/bin/bash' > /etc/profile.d/motd.sh && \
 
 # Create a helper script to list available tools
 RUN echo '#!/bin/bash' > /usr/local/bin/alpinet-tools && \
-    echo 'echo "=== AlpiNet Available Tools ==="' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo ""' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "Network Utilities:"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "  ip, ifconfig, route, ping, traceroute, mtr, telnet"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "  tcpdump, nmap, curl, wget, netcat, socat"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "  iperf, iperf3, arping (from iputils), ethtool"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo ""' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "Firewall Tools:"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "  iptables, ip6tables, nftables"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo ""' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "File Transfer:"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "  ftp (lftp), tftp, smbclient"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo ""' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "DNS Tools:"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "  host, nslookup, dig"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo ""' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "System Tools:"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "  vim, nano, git, tmux, screen, htop"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo ""' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "Python Tools:"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo "  python3, ipython, scapy"' >> /usr/local/bin/alpinet-tools && \
-    echo 'echo ""' >> /usr/local/bin/alpinet-tools && \
+    echo 'cat << "EOF"' >> /usr/local/bin/alpinet-tools && \
+    echo "=== AlpiNet Available Tools ===" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "NETWORK UTILITIES:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • IP/Interface: ip, ifconfig, route, arp" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Connectivity: ping, traceroute, mtr, arping" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Scanning: nmap, tcpdump" >> /usr/local/bin/alpinet-tools && \
+    echo "  • HTTP/Web: curl, wget" >> /usr/local/bin/alpinet-tools && \
+    echo "  • TCP/UDP: netcat (nc), socat, telnet" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Performance: iperf, iperf3" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Advanced: ethtool, bridge-utils (brctl), vlan (vconfig)" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "FIREWALL TOOLS:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • IPv4: iptables" >> /usr/local/bin/alpinet-tools && \
+    echo "  • IPv6: ip6tables" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Modern: nftables (nft)" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "FILE TRANSFER:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • FTP: lftp" >> /usr/local/bin/alpinet-tools && \
+    echo "  • TFTP: tftp" >> /usr/local/bin/alpinet-tools && \
+    echo "  • SSH: ssh, scp, sftp (openssh-client)" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Sync: rsync" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "DNS TOOLS:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Lookup: host, nslookup, dig" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "EDITORS:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • vim, nano" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "TERMINAL MULTIPLEXERS:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • tmux, screen" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "SYSTEM MONITORING:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Process: htop, top, ps" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Resources: free, vmstat" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "TEXT PROCESSING:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Viewing: less, cat" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Search: grep, find" >> /usr/local/bin/alpinet-tools && \
+    echo "  • Processing: sed, awk (gawk)" >> /usr/local/bin/alpinet-tools && \
+    echo "  • JSON: jq" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "COMPRESSION/ARCHIVING:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • tar, gzip, gunzip" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "UTILITIES:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • tree - directory visualization" >> /usr/local/bin/alpinet-tools && \
+    echo "  • file - identify file types" >> /usr/local/bin/alpinet-tools && \
+    echo "  • openssl - SSL/TLS toolkit" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo "SHELL:" >> /usr/local/bin/alpinet-tools && \
+    echo "  • bash (with completion support)" >> /usr/local/bin/alpinet-tools && \
+    echo "" >> /usr/local/bin/alpinet-tools && \
+    echo 'EOF' >> /usr/local/bin/alpinet-tools && \
     chmod +x /usr/local/bin/alpinet-tools
 
 # Set working directory

@@ -15,7 +15,7 @@
 ### Network Utilities
 - **IP Tools**: `iproute2`, `iputils` (includes `arping`), `net-tools`
 - **Network Testing**: `ping`, `traceroute`, `mtr`
-- **Traffic Analysis**: `tcpdump`, `nmap`, `nmap-scripts`
+- **Traffic Analysis**: `tcpdump`, `nmap`
 - **Performance Testing**: `iperf`, `iperf3`
 - **Network Utilities**: `curl`, `wget`, `netcat`, `socat`
 - **Advanced**: `bridge-utils`, `vlan`, `ethtool`
@@ -28,7 +28,7 @@
 ### File Transfer Clients
 - **lftp**: Advanced FTP/FTPS/HTTP client
 - **tftp**: TFTP client for network device configuration
-- **smbclient**: SMB/CIFS client for Windows file sharing
+
 
 ### DNS Tools
 - `host`, `nslookup`, `dig` (bind-tools)
@@ -37,16 +37,16 @@
 - **Editors**: `vim`, `nano`
 - **Terminal**: `bash`, `tmux`, `screen`
 - **Monitoring**: `htop`, `procps`
-- **Version Control**: `git`
-- **File Tools**: `rsync`, `tar`, `gzip`, `bzip2`, `xz`
+
+- **File Tools**: `rsync`, `tar`, `gzip`
 - **Utilities**: `jq`, `tree`, `less`, `grep`, `sed`, `awk`
 
-### Python Environment
-- `python3` with `pip`
-- `scapy` - Powerful packet manipulation tool
-- `netaddr` - Network address manipulation
-- `ipython` - Enhanced interactive Python shell
-- `requests` - HTTP library
+> **Note**: Python is not included by default to keep the image lean (~114MB). If needed, install it manually:
+> ```bash
+> apk add python3 py3-pip
+> pip3 install scapy netaddr ipython requests --break-system-packages
+> ```
+> Since `/root` is persistent, Python installations survive container restarts.
 
 ## Quick Start
 
@@ -285,9 +285,8 @@ The image is optimized for minimal size:
 - Based on Alpine Linux (~5-10 MB base)
 - Multi-layer caching for efficient builds
 - APK cache cleaned after installation
-- Python packages installed without cache
 
-Expected final image size: **~250-300 MB** (with all tools)
+Expected final image size: **~114 MB**
 
 ## Development
 
