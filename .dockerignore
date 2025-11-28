@@ -1,0 +1,32 @@
+# AlpiNet .dockerignore
+
+# Version control
+.git
+.gitignore
+
+# Documentation
+README.md
+LICENSE
+*.md
+
+# CI/CD
+.github/
+
+# IDE
+.vscode/
+.idea/
+
+# Build scripts and reference
+build.sh
+temp-ref/
+
+# GNS3 appliance file
+*.gns3a
+
+# Test files
+test/
+tmp/
+
+# OS files
+.DS_Store
+Thumbs.db

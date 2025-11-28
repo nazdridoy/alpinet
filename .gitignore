@@ -1,0 +1,33 @@
+# AlpiNet .gitignore
+
+# Reference files
+temp-ref/
+
+# Docker build artifacts
+*.tar
+*.tar.gz
+
+# OS files
+.DS_Store
+Thumbs.db
+*~
+*.swp
+*.swo
+
+# IDE files
+.vscode/
+.idea/
+*.iml
+
+# Local test files
+test/
+tmp/
+*.log
+
+# Environment files
+.env
+.env.local
+
+# Build artifacts
+dist/
+build/
