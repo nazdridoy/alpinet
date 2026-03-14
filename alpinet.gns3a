@@ -6,7 +6,7 @@
     "vendor_name": "AlpiNet Project",
     "vendor_url": "https://www.alpinelinux.org/",
     "product_name": "AlpiNet",
-    "registry_version": 4,
+    "registry_version": 3,
     "status": "stable",
     "maintainer": "nazDridoy",
     "maintainer_email": "nazdridoy399@gmail.com",

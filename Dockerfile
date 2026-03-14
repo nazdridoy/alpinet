@@ -1,10 +1,10 @@
 # AlpiNet - Lightweight Alpine-based networking toolbox for GNS3
-FROM alpine:latest
+FROM alpine:3.23
 
 # Metadata
 LABEL maintainer="nazDridoy <nazdridoy399@gmail.com>"
 LABEL description="Lightweight Alpine-based networking toolbox for GNS3"
-LABEL version="1.3.0"
+LABEL version="1.4.0-alp3.23"
 
 # Install essential networking and system utilities
 RUN apk --no-cache add \

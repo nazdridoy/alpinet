@@ -64,7 +64,7 @@ cd alpinet
 docker build -t nazdridoy/alpinet:latest .
 
 # Or build with a specific version tag
-docker build -t nazdridoy/alpinet:1.0.0 .
+docker build -t nazdridoy/alpinet:1.4.0-alp3.23 .
 ```
 
 ### Pulling from Docker Hub
@@ -74,7 +74,7 @@ docker build -t nazdridoy/alpinet:1.0.0 .
 docker pull nazdridoy/alpinet:latest
 
 # Or pull a specific version
-docker pull nazdridoy/alpinet:1.0.0
+docker pull nazdridoy/alpinet:1.4.0-alp3.23
 ```
 
 ### Running Locally
@@ -319,7 +319,7 @@ alpinet/
 docker build -t nazdridoy/alpinet:latest .
 
 # Build with custom tag
-docker build -t nazdridoy/alpinet:1.0.0 .
+docker build -t nazdridoy/alpinet:1.4.0-alp3.23 .
 
 # Build with no cache
 docker build --no-cache -t nazdridoy/alpinet:latest .
@@ -344,11 +344,11 @@ docker run -it --rm nazdridoy/alpinet:latest /bin/bash -c '
 docker login
 
 # Tag the image (if not already tagged)
-docker tag nazdridoy/alpinet:latest nazdridoy/alpinet:1.0.0
+docker tag nazdridoy/alpinet:latest nazdridoy/alpinet:1.4.0-alp3.23
 
 # Push to Docker Hub
 docker push nazdridoy/alpinet:latest
-docker push nazdridoy/alpinet:1.0.0
+docker push nazdridoy/alpinet:1.4.0-alp3.23
 ```
 
 ## Contributing
